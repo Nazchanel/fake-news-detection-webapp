@@ -1,5 +1,9 @@
 # Fake_News_Detection
-Detects fake news with a given text input
+Detects fake news with a given text input.
+
+Google Colab link:
+
+https://colab.research.google.com/drive/1FOD9tMG3YMpvAgO3_Dq9PDgf9aYKd5OW?usp=sharing
 
 Link for first data set:
 https://drive.google.com/drive/folders/13jdi2NxkiPWbyAtG1P1jWNI6qbXvBbfE?usp=sharing
