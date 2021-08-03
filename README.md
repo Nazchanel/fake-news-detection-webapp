@@ -11,7 +11,7 @@ Presentation:
 
 https://docs.google.com/presentation/d/1rVVSP1Ch2L15F1XHp9MVh4enWIR-1-yHwjybHSG_ba8/edit?usp=sharing
 
-Link for first data set:
+Link for first dataset:
 https://drive.google.com/drive/folders/13jdi2NxkiPWbyAtG1P1jWNI6qbXvBbfE?usp=sharing
 
 Link for second dataset:
