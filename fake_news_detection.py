@@ -476,15 +476,15 @@ df1['predicted'].mask(df1['predicted'] == 0, 'false', inplace=True)
 df1['predicted'].mask(df1['predicted'] == 1, 'true', inplace=True)
 df1.head()
 
-"""##  **Model, Vectorization, Prediction** (Manual)"""
+# """##  **Model, Vectorization, Prediction** (Manual)"""
 
-tmp = df["joined"]
-text_sample = pd.Series.tolist(tmp)
+# tmp = df["joined"]
+# text_sample = pd.Series.tolist(tmp)
 
-sample_predict = text_clf.predict(text_sample)
+# sample_predict = text_clf.predict(text_sample)
 
-df2['predicted'] = sample_predict.tolist()
-df2['predicted'].mask(df2['predicted'] == 0, 'false', inplace=True)
-df2['predicted'].mask(df2['predicted'] == 1, 'true', inplace=True)
+# df2['predicted'] = sample_predict.tolist()
+# df2['predicted'].mask(df2['predicted'] == 0, 'false', inplace=True)
+# df2['predicted'].mask(df2['predicted'] == 1, 'true', inplace=True)
 
-df2
+# df2
