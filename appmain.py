@@ -18,7 +18,7 @@ nltk.download('punkt')
 """Import/Preprocessing (training)**
     Import/CSV processing
         """
-os.chdir(r"C:\Users\python\PycharmProjects\https\FakeNews")  # Changes the directory to the folder with the csv files
+os.chdir("./FakeNews")  # Changes the directory to the folder with the csv files
 
 fn = pd.read_csv("Fake.csv")
 tn = pd.read_csv("True.csv")
@@ -29,7 +29,7 @@ tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
 # Import and processing/cleaning of the dataframe
-extra = pd.read_csv(r"C:\Users\python\PycharmProjects\https\archive8\politifact.csv")
+extra = pd.read_csv("./archive8/politifact.csv")
 
 # Drops the columns and rows that are not relevant
 extra = extra.drop(
@@ -233,4 +233,4 @@ def foo():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
