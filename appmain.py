@@ -11,7 +11,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 
-app = Flask(__name__) # Declare flask app
+app = Flask(__name__)  # Declare flask app
 
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
@@ -234,4 +234,4 @@ def foo():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
