@@ -29,7 +29,7 @@ tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
 # Import and processing/cleaning of the dataframe
-extra = pd.read_csv("./archive8/politifact.csv")
+extra = pd.read_csv("../archive8/politifact.csv")
 
 # Drops the columns and rows that are not relevant
 extra = extra.drop(
