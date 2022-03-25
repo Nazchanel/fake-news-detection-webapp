@@ -11,6 +11,8 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 
+app = Flask(__name__) # Declare flask app
+
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
 nltk.download('punkt')
@@ -158,8 +160,6 @@ text_clf = Pipeline([('vect', TfidfVectorizer(ngram_range=(2, 3), binary=True)),
                      ('clf', MultinomialNB())])
 
 text_clf = text_clf.fit(X_train, y_train)
-
-app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
