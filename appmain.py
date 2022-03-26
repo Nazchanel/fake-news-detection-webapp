@@ -18,9 +18,11 @@ app = Flask(__name__)  # Declare flask app
 
 
 os.mkdir("archive9")
+print(f"The current directory >>> {os.listdir}")
 
 with zipfile.ZipFile("archive8.zip", "r") as zip_ref:
     zip_ref.extractall("./archive9")
+print(f"The current directory >>> {os.listdir}")
 
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
