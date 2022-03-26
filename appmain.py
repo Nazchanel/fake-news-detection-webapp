@@ -33,7 +33,7 @@ fn.drop_duplicates(inplace=True)
 # Import and processing/cleaning of the dataframe
 extra = pd.read_csv("../archive8/politifact.csv")
 
-print(extra)
+
 # Drops the columns and rows that are not relevant
 extra = extra.drop(
     columns=['Unnamed: 0', 'sources', 'sources_dates', 'sources_post_location', 'curator_name', 'curated_date',
