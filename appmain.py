@@ -17,10 +17,10 @@ import zipfile
 app = Flask(__name__)  # Declare flask app
 
 
-os.mkdir("archive8")
+os.mkdir("archive9")
 
 with zipfile.ZipFile("archive8.zip", "r") as zip_ref:
-    zip_ref.extractall("./archive8")
+    zip_ref.extractall("./archive9")
 
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
@@ -37,7 +37,7 @@ tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
 # Import and processing/cleaning of the dataframe
-extra = pd.read_csv("../archive8/politifact.csv")
+extra = pd.read_csv("../archive9/politifact.csv")
 
 
 # Drops the columns and rows that are not relevant
