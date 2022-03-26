@@ -10,8 +10,9 @@ import nltk
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
+import zipfile
 
-app = Flask(__name__)  # Declare flask app
+app = Flask(__name__) # Declare flask app
 
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
@@ -30,9 +31,12 @@ tn['truth'] = 1  # Makes a column of 1s marking the data true
 tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
-# Import and processing/cleaning of the dataframe
-extra = pd.read_csv("../archive8/politifact.csv")
+os.chdir("..") # Move back one directory
+ 
+zipfile.ZipFile("archive8.zip", 'r').extractall("./") # Extract the archive8 zip
 
+# Import and processing/cleaning of the dataframe
+extra = pd.read_csv("./archive8/politifact.csv")
 
 # Drops the columns and rows that are not relevant
 extra = extra.drop(
@@ -234,4 +238,4 @@ def foo():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", debug=True)
