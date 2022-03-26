@@ -1,5 +1,3 @@
-import sys
-
 from flask import Flask, request, render_template
 from sklearn.model_selection import train_test_split
 import pandas as pd
@@ -14,20 +12,15 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 import zipfile
 
-app = Flask(__name__)  # Declare flask app
-
-
-os.mkdir("archive9")
-print(f"The current directory >>> {os.listdir}")
-
-with zipfile.ZipFile("archive8.zip", "r") as zip_ref:
-    zip_ref.extractall("./archive9")
-print(f"The current directory >>> {os.listdir}")
+app = Flask(__name__) # Declare flask app
 
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
 nltk.download('punkt')
 
+"""Import/Preprocessing (training)**
+    Import/CSV processing
+        """
 os.chdir("./FakeNews")  # Changes the directory to the folder with the csv files
 
 fn = pd.read_csv("Fake.csv")
@@ -38,9 +31,12 @@ tn['truth'] = 1  # Makes a column of 1s marking the data true
 tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
-# Import and processing/cleaning of the dataframe
-extra = pd.read_csv("../archive9/politifact.csv")
+os.chdir("..") # Move back one directory
+ 
+zipfile.ZipFile("archive8.zip", 'r').extractall("./") # Extract the archive8 zip
 
+# Import and processing/cleaning of the dataframe
+extra = pd.read_csv("./archive8/politifact.csv")
 
 # Drops the columns and rows that are not relevant
 extra = extra.drop(
