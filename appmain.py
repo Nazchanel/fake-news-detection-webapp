@@ -72,7 +72,7 @@ def remove_lines(text):
 # IMPORTANT: Balances the data; making the value higher will lean the program
 # to predict true, lower is the opposite
 
-fn = fn[:-1000]
+fn = fn[:-3000]
 
 fn.rename(columns={0: "title", 1: "text", 2: "subject", 3: "date", 4: "truth"}, inplace=True)
 
