@@ -12,15 +12,13 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 import zipfile
 
-app = Flask(__name__) # Declare flask app
+app = Flask(__name__)  # Declare flask app
 
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
 nltk.download('punkt')
+print("\n" + "Marker 1" + "\n")
 
-"""Import/Preprocessing (training)**
-    Import/CSV processing
-        """
 os.chdir("./FakeNews")  # Changes the directory to the folder with the csv files
 
 fn = pd.read_csv("Fake.csv")
@@ -31,55 +29,15 @@ tn['truth'] = 1  # Makes a column of 1s marking the data true
 tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
-# os.chdir("..") # Move back one directory
- 
-# zipfile.ZipFile("archive8.zip", 'r').extractall("./") # Extract the archive8 zip
-
-# Import and processing/cleaning of the dataframe
-# extra = pd.read_csv("./archive8/politifact.csv")
-
-# Drops the columns and rows that are not relevant
-# extra = extra.drop(
-#     columns=['Unnamed: 0', 'sources', 'sources_dates', 'sources_post_location', 'curator_name', 'curated_date',
-#              'curators_article_title', 'curator_complete_article', 'curator_tags', 'sources_url'])
-# extra.drop_duplicates(inplace=True)
-# extra.dropna(inplace=True)
-#
-# # Replaces the truths we want with their corresponding binary value
-# extra['fact'].replace(['false', "pants-fire"], 0, inplace=True)
-# extra['fact'].replace(['true', 'mostly-true'], 1, inplace=True)
-#
-# # Drops the rows of the truths we don't need
-# extra.drop(extra.loc[extra['fact'] == "half-true"].index, inplace=True)
-# extra.drop(extra.loc[extra['fact'] == "barely-true"].index, inplace=True)
-# extra.drop(extra.loc[extra['fact'] == "full-flop"].index, inplace=True)
-# extra.drop(extra.loc[extra['fact'] == "half-flip"].index, inplace=True)
-# extra.drop(extra.loc[extra['fact'] == "no-flip"].index, inplace=True)
-#
-# extra.rename(columns={'sources_quote': 'title', 'fact': 'truth'}, inplace=True)
-
-
-# Removes the \n's in the DataFrame
-def remove_lines(text):
-    text = text.strip("\n")
-    return text
-
-
-# extra['title'] = extra['title'].apply(lambda x: remove_lines(x))
-#
-# extra['text'] = extra['title']
-
-# IMPORTANT: Balances the data; making the value higher will lean the program
-# to predict true, lower is the opposite
-
-fn = fn[:-3000]
+fn = fn[:-2000]
 
 fn.rename(columns={0: "title", 1: "text", 2: "subject", 3: "date", 4: "truth"}, inplace=True)
 
 news = pd.concat([tn, fn], axis=0, ignore_index=True)  # Combines the dataframes so its easier to work with
 
 news.drop_duplicates(inplace=True)  # Drops any leftover duplicates
-"""Preprocessing"""
+
+news.drop(columns=["title"], inplace=True)
 
 
 def remove_contractions(text):
@@ -98,8 +56,9 @@ def remove_contractions(text):
     return fixed_whole
 
 
+print("\n" + "Contractions removed" + "\n")
+
 # Applies the functions with lambda to do the stated function
-news['title_wo_contra'] = news['title'].apply(lambda x: remove_contractions(x))
 news['text_wo_contra'] = news['text'].apply(lambda x: remove_contractions(x))
 
 
@@ -110,7 +69,6 @@ def remove_punctuation(text):
 
 
 # Applies the functions with lambda to do the stated function
-news['title_wo_punct'] = news['title_wo_contra'].apply(lambda x: remove_punctuation(x))
 news['text_wo_punct'] = news['text_wo_contra'].apply(lambda x: remove_punctuation(x))
 
 
@@ -122,12 +80,8 @@ def remove_stopwords(text):
 
 
 # Applies the functions with lambda to do the stated function
-news['title_wo_stopwords'] = news['title_wo_punct'].apply(lambda x: remove_stopwords(x.lower()))
 news['text_wo_stopwords'] = news['text_wo_punct'].apply(lambda x: remove_stopwords(x.lower()))
 
-
-# Removes any formatted quotation marks that the remove contractions function
-# didn't remove
 
 def remove_quotemarks(text):
     text = text.replace('“', "")
@@ -136,21 +90,15 @@ def remove_quotemarks(text):
     return text
 
 
-news['filtered_title'] = news['title_wo_stopwords'].apply(lambda x: remove_quotemarks(x))
 news['filtered'] = news['text_wo_stopwords'].apply(lambda x: remove_quotemarks(x))
 
 # Deletes all the excess columns and sets the title equal to the preprocessed version
 
-news["joined_title"] = news["filtered_title"]
-news = news.drop(["title_wo_contra", "title_wo_punct", "title_wo_stopwords", "filtered_title"], axis=1)
+
 news["joined_text"] = news["filtered"]
-news = news.drop(["text_wo_contra", "text_wo_punct", "text_wo_stopwords", "filtered"], axis=1)
+news.drop(["text_wo_contra", "text_wo_punct", "text_wo_stopwords", "filtered"], axis=1, inplace=True)
 
-"""# **Model**
-
-## **Vectorization/Model**
-"""
-
+print("\n" + "Machine Learning Model Reached" + "\n")
 y = news['truth']
 y = y.astype('int')  # Some of the y values are "objects", so this converts it to int
 X = news['joined_text']
