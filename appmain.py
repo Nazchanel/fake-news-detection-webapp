@@ -10,7 +10,6 @@ import nltk
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
-import zipfile
 
 app = Flask(__name__)  # Declare flask app
 
