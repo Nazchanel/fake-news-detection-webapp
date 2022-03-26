@@ -17,6 +17,8 @@ import zipfile
 app = Flask(__name__)  # Declare flask app
 
 
+os.mkdir("archive8")
+
 with zipfile.ZipFile("archive8.zip", "r") as zip_ref:
     zip_ref.extractall("./archive8")
 
