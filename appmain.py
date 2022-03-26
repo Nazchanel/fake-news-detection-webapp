@@ -31,32 +31,32 @@ tn['truth'] = 1  # Makes a column of 1s marking the data true
 tn.drop_duplicates(inplace=True)
 fn.drop_duplicates(inplace=True)
 
-os.chdir("..") # Move back one directory
+# os.chdir("..") # Move back one directory
  
-zipfile.ZipFile("archive8.zip", 'r').extractall("./") # Extract the archive8 zip
+# zipfile.ZipFile("archive8.zip", 'r').extractall("./") # Extract the archive8 zip
 
 # Import and processing/cleaning of the dataframe
-extra = pd.read_csv("./archive8/politifact.csv")
+# extra = pd.read_csv("./archive8/politifact.csv")
 
 # Drops the columns and rows that are not relevant
-extra = extra.drop(
-    columns=['Unnamed: 0', 'sources', 'sources_dates', 'sources_post_location', 'curator_name', 'curated_date',
-             'curators_article_title', 'curator_complete_article', 'curator_tags', 'sources_url'])
-extra.drop_duplicates(inplace=True)
-extra.dropna(inplace=True)
-
-# Replaces the truths we want with their corresponding binary value
-extra['fact'].replace(['false', "pants-fire"], 0, inplace=True)
-extra['fact'].replace(['true', 'mostly-true'], 1, inplace=True)
-
-# Drops the rows of the truths we don't need
-extra.drop(extra.loc[extra['fact'] == "half-true"].index, inplace=True)
-extra.drop(extra.loc[extra['fact'] == "barely-true"].index, inplace=True)
-extra.drop(extra.loc[extra['fact'] == "full-flop"].index, inplace=True)
-extra.drop(extra.loc[extra['fact'] == "half-flip"].index, inplace=True)
-extra.drop(extra.loc[extra['fact'] == "no-flip"].index, inplace=True)
-
-extra.rename(columns={'sources_quote': 'title', 'fact': 'truth'}, inplace=True)
+# extra = extra.drop(
+#     columns=['Unnamed: 0', 'sources', 'sources_dates', 'sources_post_location', 'curator_name', 'curated_date',
+#              'curators_article_title', 'curator_complete_article', 'curator_tags', 'sources_url'])
+# extra.drop_duplicates(inplace=True)
+# extra.dropna(inplace=True)
+#
+# # Replaces the truths we want with their corresponding binary value
+# extra['fact'].replace(['false', "pants-fire"], 0, inplace=True)
+# extra['fact'].replace(['true', 'mostly-true'], 1, inplace=True)
+#
+# # Drops the rows of the truths we don't need
+# extra.drop(extra.loc[extra['fact'] == "half-true"].index, inplace=True)
+# extra.drop(extra.loc[extra['fact'] == "barely-true"].index, inplace=True)
+# extra.drop(extra.loc[extra['fact'] == "full-flop"].index, inplace=True)
+# extra.drop(extra.loc[extra['fact'] == "half-flip"].index, inplace=True)
+# extra.drop(extra.loc[extra['fact'] == "no-flip"].index, inplace=True)
+#
+# extra.rename(columns={'sources_quote': 'title', 'fact': 'truth'}, inplace=True)
 
 
 # Removes the \n's in the DataFrame
@@ -65,18 +65,18 @@ def remove_lines(text):
     return text
 
 
-extra['title'] = extra['title'].apply(lambda x: remove_lines(x))
-
-extra['text'] = extra['title']
+# extra['title'] = extra['title'].apply(lambda x: remove_lines(x))
+#
+# extra['text'] = extra['title']
 
 # IMPORTANT: Balances the data; making the value higher will lean the program
 # to predict true, lower is the opposite
 
-fn = fn[:-2000]
+fn = fn[:-1000]
 
 fn.rename(columns={0: "title", 1: "text", 2: "subject", 3: "date", 4: "truth"}, inplace=True)
 
-news = pd.concat([tn, fn, extra], axis=0, ignore_index=True)  # Combines the dataframes so its easier to work with
+news = pd.concat([tn, fn], axis=0, ignore_index=True)  # Combines the dataframes so its easier to work with
 
 news.drop_duplicates(inplace=True)  # Drops any leftover duplicates
 """Preprocessing"""
