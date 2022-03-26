@@ -1,5 +1,3 @@
-import sys
-
 from flask import Flask, request, render_template
 from sklearn.model_selection import train_test_split
 import pandas as pd
@@ -16,16 +14,13 @@ import zipfile
 
 app = Flask(__name__) # Declare flask app
 
-
-os.mkdir("archive8")
-
-with zipfile.ZipFile("archive8.zip", "r") as zip_ref:
-    zip_ref.extractall("./archive8")
-
 nltk.download('stopwords')
 stopword = nltk.corpus.stopwords.words('english')
 nltk.download('punkt')
 
+"""Import/Preprocessing (training)**
+    Import/CSV processing
+        """
 os.chdir("./FakeNews")  # Changes the directory to the folder with the csv files
 
 fn = pd.read_csv("Fake.csv")
