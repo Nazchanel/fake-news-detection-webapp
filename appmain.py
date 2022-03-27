@@ -233,4 +233,8 @@ def foo():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(host="0.0.0.0", debug=True)
+>>>>>>> 36fafb39875de5004588825644afb6642e58ffe8
