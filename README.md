@@ -1,24 +1,24 @@
-# Fake_News_Detection
-Detects fake news with a given text input.
+<h2><u>WARNING: CODE CURRENTLY BEING ORGANIZED</u></h2>
 
-Completed for the UTD 9 week AI Workshop
+# Fake News Detection
 
-Google Colab link:
+Completed for the UTD 9 week AI Workshop. Detects fake news with a given text input.
+
+## Google Colab link:
 
 https://colab.research.google.com/drive/1FOD9tMG3YMpvAgO3_Dq9PDgf9aYKd5OW?usp=sharing
 
-Presentation:
+## Presentation:
 
 https://docs.google.com/presentation/d/1rVVSP1Ch2L15F1XHp9MVh4enWIR-1-yHwjybHSG_ba8/edit?usp=sharing
 
-Link for first dataset:
+## Link for first dataset:
 https://drive.google.com/drive/folders/13jdi2NxkiPWbyAtG1P1jWNI6qbXvBbfE?usp=sharing
 
-Link for second dataset:
+## Link for second dataset:
 https://drive.google.com/drive/folders/1-iBYOUtdmCTk9D14FGBdVKFYLh1F2BMc?usp=sharing
 
-
-Sources/Credits:
+## Sources/Credits:
 
 Dataset 1: https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset
 
