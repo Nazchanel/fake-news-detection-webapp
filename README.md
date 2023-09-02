@@ -1,5 +1,3 @@
-<h2><u>WARNING: CODE CURRENTLY BEING ORGANIZED</u></h2>
-
 # Fake News Detection
 
 Completed for the UTD 9 week AI Workshop. Detects fake news with a given text input.
